@@ -1,0 +1,30 @@
+model: AttentionSeq2Seq
+model_params:
+  attention.class: seq2seq.decoders.attention.AttentionLayerBahdanau
+  attention.params:
+    num_units: 320
+  bridge.class: seq2seq.models.bridges.ZeroBridge
+  embedding.dim: 320
+  encoder.class: seq2seq.encoders.BidirectionalRNNEncoder
+  encoder.params:
+    rnn_cell:
+      cell_class: GRUCell
+      cell_params:
+        num_units: 320
+      dropout_input_keep_prob: 0.85
+      dropout_output_keep_prob: 0.88
+      num_layers: 1
+  decoder.class: seq2seq.decoders.AttentionDecoder
+  decoder.params:
+    rnn_cell:
+      cell_class: GRUCell
+      cell_params:
+        num_units: 320
+      dropout_input_keep_prob: 0.88
+      dropout_output_keep_prob: 1.0
+      num_layers: 1
+  optimizer.name: Adam
+  optimizer.learning_rate: 0.0001
+  source.max_seq_len: 120
+  source.reverse: true
+  target.max_seq_len: 320
